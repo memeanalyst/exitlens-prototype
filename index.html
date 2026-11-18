@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <title>ExitLens — The exit interview, reimagined</title>
+    <meta name="description" content="A face-to-face AI interview that asks your churned customers why they really left, and hands you the themes." />
+    <meta name="theme-color" content="#e9f4fc" />
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='13' fill='none' stroke='%230284c7' stroke-width='3'/%3E%3Ccircle cx='16' cy='16' r='5' fill='%230ea5e9'/%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+    <script type="module" crossorigin src="./assets/index-CTpQHsym.js"></script>
+    <link rel="stylesheet" crossorigin href="./assets/index-Bq1Pdn3i.css">
+  </head>
+  <body>
+    <div class="aurora" aria-hidden="true">
+      <div class="blob blob-a"></div>
+      <div class="blob blob-b"></div>
+      <div class="blob blob-c"></div>
+      <div class="grain"></div>
+    </div>
+
+    <header class="topbar">
+      <div class="brand">
+        <span class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="13" stroke="currentColor" stroke-width="2.5"/><circle cx="16" cy="16" r="5" fill="currentColor"/><path d="M16 3v6M16 23v6M3 16h6M23 16h6" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg>
+        </span>
+        <span class="brand-name">Exit<em>Lens</em></span>
+        <span class="brand-tag">AI churn interviews</span>
+      </div>
+      <div class="topbar-right">
+        <span class="live-pill" id="session-pill"><span class="dot"></span><span id="session-pill-text">Prototype</span></span>
+      </div>
+    </header>
+
+    <main class="layout">
+      <section class="stage-card glass">
+        <div class="stage-media">
+          <video id="avatar-video" autoplay playsinline></video>
+          <audio id="avatar-audio" autoplay></audio>
+          <div class="stage-shade"></div>
+
+          <div class="stage-overlay overlay-pre" id="overlay-pre">
+            <p class="eyebrow">Exit interview · 7 minutes · face to face</p>
+            <h1>You left.<br /><span class="grad-text">Tell us why — out loud.</span></h1>
+            <p class="lede">No forms. No star ratings. A real conversation with Alex, our AI interviewer, who listens, follows up, and turns what you say into answers a product team can actually use.</p>
+            <ul class="expect">
+              <li><strong>Private by design</strong> — you are talking to an AI, and it says so.</li>
+              <li><strong>Your words, not scores</strong> — a transcript and themes, nothing else.</li>
+              <li><strong>Leave any time</strong> — hang up and it ends, instantly.</li>
+            </ul>
+          </div>
+
+          <div class="stage-overlay overlay-live hidden" id="overlay-live">
+            <div class="live-row">
+              <span class="rec"><span class="rec-dot"></span>LIVE</span>
+              <span class="timer mono" id="timer">00:00</span>
+            </div>
+          </div>
+
+          <div class="stage-overlay overlay-done hidden" id="overlay-done">
+            <p class="eyebrow">Interview complete</p>
+            <h2>Thank you.<br /><span class="grad-text">That is genuinely useful.</span></h2>
+            <p class="lede" id="done-summary">Your interview has been transcribed and coded into themes on the right.</p>
+          </div>
+
+        </div>
+
+        <div class="controls">
+          <button class="btn-primary" id="btn-start">
+            <span class="btn-label">Start the interview</span>
+            <span class="btn-arrow" aria-hidden="true">→</span>
+          </button>
+          <button class="btn-ghost hidden" id="btn-end">End interview</button>
+          <p class="controls-note" id="controls-note">Microphone only — your camera stays off. For participants 18+. Available in the US, EU, UK &amp; Canada.</p>
+          <p class="controls-error hidden" id="controls-error" role="alert"></p>
+        </div>
+      </section>
+
+      <aside class="side">
+        <section class="glass panel roadmap-panel">
+          <div class="panel-head">
+            <h3>The conversation map</h3>
+            <span class="mono panel-count" id="roadmap-count">0 / 6</span>
+          </div>
+          <ol class="roadmap" id="roadmap">
+            <li data-topic="trigger"><span class="rm-idx">01</span><span class="rm-name">The trigger</span><span class="rm-state">What finally made you cancel</span></li>
+            <li data-topic="usage"><span class="rm-idx">02</span><span class="rm-name">Real usage</span><span class="rm-state">The job you hired it for</span></li>
+            <li data-topic="value"><span class="rm-idx">03</span><span class="rm-name">Price &amp; value</span><span class="rm-state">Was it worth it</span></li>
+            <li data-topic="problems"><span class="rm-idx">04</span><span class="rm-name">Friction</span><span class="rm-state">Bugs, gaps, frustrations</span></li>
+            <li data-topic="switch"><span class="rm-idx">05</span><span class="rm-name">The switch</span><span class="rm-state">What you use now</span></li>
+            <li data-topic="winback"><span class="rm-idx">06</span><span class="rm-name">The win-back</span><span class="rm-state">What would bring you back</span></li>
+          </ol>
+        </section>
+
+        <section class="glass panel transcript-panel">
+          <div class="panel-head">
+            <h3>Live transcript</h3>
+            <span class="mono panel-count" id="turn-count">0 turns</span>
+          </div>
+          <div class="transcript" id="transcript">
+            <p class="transcript-empty" id="transcript-empty">When the interview starts, everything said appears here — word for word, as it happens.</p>
+          </div>
+        </section>
+
+        <section class="glass panel report-panel hidden" id="report-panel">
+          <div class="panel-head">
+            <h3>Signal report</h3>
+            <span class="mono panel-count">auto-coded</span>
+          </div>
+          <div class="signals" id="signals"></div>
+          <div class="report-actions">
+            <button class="btn-mini" id="btn-copy">Copy transcript</button>
+            <button class="btn-mini" id="btn-download">Download .md</button>
+          </div>
+          <p class="report-note">Prototype coding is keyword-based and indicative only. The production report is written by a language model from the full transcript.</p>
+        </section>
+      </aside>
+    </main>
+
+    <footer class="foot">
+      <span>ExitLens prototype · Powered by Nuance Live (Nuplex)</span>
+      <span class="foot-right">The persona is an AI. Sessions are disclosed and watermarked by the platform. Participants 18+.</span>
+    </footer>
+
+  </body>
+</html>
